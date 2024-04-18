@@ -23,4 +23,12 @@ class $modify(MyPauseLayer, PauseLayer) {
 			getChildByIDRecursive("right-button-menu")->addChild(editButton);
 		}
 	}
+	void onEdit(CCObject* sender) {
+		auto type = PlayLayer::get()->m_level->m_levelType;
+		if (Mod::get()->getSettingValue<bool>("enabled")) {
+			PlayLayer::get()->m_level->m_levelType = GJLevelType::Editor;
+		}
+		PauseLayer::onEdit(sender);
+		PlayLayer::get()->m_level->m_levelType = type;
+	}
 };
